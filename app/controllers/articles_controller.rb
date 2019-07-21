@@ -98,6 +98,6 @@ class ArticlesController < ApplicationController
   end
 
   def target
-    params[:target]
+    'ru'
   end
 end
