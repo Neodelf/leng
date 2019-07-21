@@ -1,0 +1,31 @@
+.main
+  .top
+    button = link_to 'Create new batch', root_path
+    button Next word
+  - if @word.rank == 3
+    .left
+      .word-image = image_tag @word.image_url, class: 'image'
+      br
+      .word = @word.source
+    .right
+      - supposed_word = @words.where.not(id: @word_id).sample(2)
+      - supposed_word.push(@word).shuffle.each do |supposed_word|
+          .button data-word-id=@word.id = supposed_word.translation
+  - elsif @word.rank == 2
+    .left
+      .word-image = image_tag @word.image_url, class: 'image'
+      br
+      .word = @word.source
+    .right
+      .translation-source
+        'Type your's translation variant
+        = text_field_tag :translation, nil, placeholder: '*' * @word.translation.size, class: 'placeholder', data: { 'word-id' => @word.id, 'word-translation-size': @word.translation.size }
+  - elsif @word.rank == 1
+    .left
+      .word-image = image_tag @word.image_url, class: 'image'
+      br
+      .word = @word.translation
+    .right
+      .translation-source
+        'Type your's source variant
+        = text_field_tag :source, nil, placeholder: '*' * @word.source.size, class: 'placeholder', data: { 'word-id' => @word.id, 'word-source-size': @word.source.size }

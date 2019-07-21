@@ -1,0 +1,9 @@
+= form_tag articles_path do
+  p
+    = label_tag :url
+    = text_field_tag :url
+
+  p
+    = select_tag :target, options_for_select([ 'ru', 'ja'], 'ru')
+
+  = submit_tag :learn
